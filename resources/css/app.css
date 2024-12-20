@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swal-cancel-btn {
+    color: #000000;
+    font-weight: bold;
+}
