@@ -89,6 +89,7 @@
                                         <th class="px-4 py-2 text-left">Estado</th>
                                         <th class="px-4 py-2 text-left">Costo</th>
                                         <th class="px-4 py-2 text-left">Asumido por</th>
+                                        <th class="px-4 py-2 text-left">Comentarios</th>
                                         <th class="px-4 py-2 text-left">Acciones</th>
                                     </tr>
                                 </thead>
@@ -119,6 +120,7 @@
                                             @else
                                             Sin asignar
                                             @endif</td>
+                                        <td class="px-4 py-2 max-w-xs text-ellipsis overflow-hidden whitespace-nowrap" title="{{ $task->notes }}">{{ $task->notes }}</td>
                                         <td class="px-4 py-3">
                                             <span
                                                 onclick="openModal('finishTaskModal{{ $task->id }}')"

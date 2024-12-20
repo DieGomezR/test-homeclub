@@ -145,6 +145,30 @@ class TaskController extends Controller
         return response()->json(['message' => 'Tarea finalizada'], 200);
     }
 
+    public function showIncidenceTasks($id)
+    {
+        $tasks = Task::where('incidence_id', $id)->get();
+
+        if ($tasks->isEmpty()) {
+            return response()->json(['message' => 'No existen tareas para esta incidencia'], 404);
+        }
+
+        $tasks = $tasks->map(function ($task) {
+            return [
+                'id' => $task->id,
+                'incidence_id' => $task->incidence->id,
+                'title' => $task->title,
+                'description' => $task->description,
+                'status' => $task->status,
+                'notes' => $task->notes,
+                'price' => $task->price,
+                'assumed_by' => $task->assumed_by,
+            ];
+        });
+
+        return response()->json($tasks, 200);
+    }
+
     public function destroy($id)
     {
         Task::destroy($id);
