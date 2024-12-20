@@ -24,7 +24,7 @@ Asegúrate de tener instalados los siguientes programas:
    cd test-homeclub
    ```
 
-2. **Instalar Dependencias de PHP**
+2. **Instalar Dependencias de PHP (Puede que de error instalando las librerias, intentarlo varias veces)**
    ```bash
    composer install
    ```
