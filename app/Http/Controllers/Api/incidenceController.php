@@ -75,6 +75,7 @@ class IncidenceController extends Controller
         $validated = Validator::make($request->all(), [
             'booking_id' => 'required|exists:bookings,id',
             'description' => 'required|string',
+            'status' => 'required|string',
         ]);
 
         if ($validated->fails()) {
@@ -89,6 +90,7 @@ class IncidenceController extends Controller
         $incidence->update([
             'booking_id' => $request->booking_id,
             'description' => $request->description,
+            'status' => $request->status,
         ]);
 
         $data = [

@@ -13,6 +13,7 @@ class Incidence extends Model
     protected $fillable = [
         'booking_id',
         'description',
+        'status',
     ];
 
     public function booking()

@@ -31,17 +31,7 @@
                         <td class="px-4 py-3 max-w-xs text-ellipsis overflow-hidden whitespace-nowrap" title="{{ $incidence->description }}">
                             {{ $incidence->description }}
                         </td>
-                        <td class="px-4 py-3">
-                            @if ($incidence->tasks->isEmpty())
-                            Nuevo
-                            @elseif ($incidence->tasks->where('status', '!=', 'solved')
-                            ->where('status', '!=', 'closed')
-                            ->isNotEmpty())
-                            Tareas pendientes por realizar
-                            @else
-                            Tareas completadas
-                            @endif
-                        </td>
+                        <td class="px-4 py-3">{{$incidence->status}}</td>
                         <td class="px-4 py-3">
                             <span
                                 onclick="toggleChildRows('{{ $incidence->id }}')"
@@ -312,6 +302,18 @@
 'value' => $incidence->description,
 'type' => 'textarea',
 'readonly' => false
+],
+[
+'id' => 'status',
+'name' => 'status',
+'label' => 'Estado del incidente',
+'value' => $incidence->status,
+'type' => 'select',
+'readonly' => false,
+'options' => [
+'pending' => 'Pendiente',
+'closed' => 'Cerrado',
+]
 ],
 ]
 ])
