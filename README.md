@@ -1,66 +1,123 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descripción
+Este proyecto es un sistema de gestión de propiedades, reservas, incidencias y tareas desarrollado con Laravel. Proporciona una interfaz de usuario basada en Blade templates para administrar propiedades, realizar reservas, gestionar incidencias y asignar tareas asociadas.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Instalación
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Requisitos Previos
+Asegúrate de tener instalados los siguientes programas:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [PHP](https://www.php.net/) (v8.1 o superior)
+- [Composer](https://getcomposer.org/)
+- [MySQL](https://www.mysql.com/) u otro sistema de bases de datos compatible
+- [Node.js](https://nodejs.org/) (v16 o superior, para compilar assets con Vite)
+- Servidor web como Apache o Nginx
 
-## Learning Laravel
+### Pasos de Instalación
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Clonar el Repositorio**
+   ```bash
+   git clone https://github.com/DieGomezR/test-homeclub
+   cd test-homeclub
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. **Instalar Dependencias de PHP**
+   ```bash
+   composer install
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. **Instalar Dependencias de Node.js**
+   ```bash
+   npm install
+   ```
 
-## Laravel Sponsors
+4. **Configurar el Archivo `.env`**
+   Crea un archivo `.env` basado en el ejemplo incluido:
+   ```bash
+   cp .env.example .env
+   ```
+   Edita el archivo `.env` para configurar los detalles de conexión a la base de datos:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=nombre_de_la_base_de_datos
+   DB_USERNAME=usuario
+   DB_PASSWORD=contraseña
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+5. **Generar la Clave de la Aplicación**
+   ```bash
+   php artisan key:generate
+   ```
 
-### Premium Partners
+6. **Ejecutar las Migraciones**
+   Este paso creará las tablas necesarias en tu base de datos:
+   ```bash
+   php artisan migrate
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+7. **Compilar los Assets**
+   Para compilar los archivos CSS y JavaScript:
+   ```bash
+   npm run dev
+   ```
+   Si estás preparando el proyecto para producción, usa:
+   ```bash
+   npm run build
+   ```
 
-## Contributing
+8. **Iniciar el Servidor de Desarrollo**
+   ```bash
+   php artisan serve
+   ```
+   La aplicación estará disponible en: [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Uso
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Navegación por Módulos
 
-## Security Vulnerabilities
+- **Propiedades:** [http://127.0.0.1:8000/properties](http://127.0.0.1:8000/properties)
+- **Reservas:** [http://127.0.0.1:8000/bookings](http://127.0.0.1:8000/bookings)
+- **Incidencias:** [http://127.0.0.1:8000/incidences](http://127.0.0.1:8000/incidences)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Cada módulo permite crear, ver y administrar los elementos correspondientes.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Comandos Útiles
+
+- **Limpiar cachés:**
+  ```bash
+  php artisan cache:clear
+  php artisan config:clear
+  php artisan route:clear
+  ```
+
+---
+
+## Contribuciones
+
+Si deseas contribuir al proyecto:
+
+1. Haz un fork del repositorio.
+2. Crea una rama para tu feature:
+   ```bash
+   git checkout -b feature/nueva-funcionalidad
+   ```
+3. Realiza tus cambios y haz commit:
+   ```bash
+   git commit -m "Descripción de los cambios"
+   ```
+4. Envía un pull request.
+
+---
+
+## Licencia
+
+Este proyecto está licenciado bajo la [MIT License](LICENSE).
