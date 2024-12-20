@@ -9,16 +9,23 @@ use Illuminate\Support\Facades\Validator;
 
 class PropertyController extends Controller
 {
+
     public function index()
     {
-        // Obtener propiedades con las reservas asociadas
-        $properties = Property::with('booking')->get();
+        $property = Property::with('booking')->get();
 
-        if ($properties->isEmpty()) {
+        if ($property->isEmpty()) {
             return response()->json(['message' => 'No se encontraron propiedades'], 404);
         }
 
-        return view('properties.index', compact('properties'));
+        $property = $property->map(function ($property) {
+            return [
+                'id' => $property->id,
+                'name' => $property->name,
+            ];
+        });
+
+        return response()->json($property, 200);
     }
 
     public function store(Request $request)
@@ -28,20 +35,32 @@ class PropertyController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validación fallida',
+            $data = [
+                'message' => 'Validacion fallida',
                 'errors' => $validator->errors(),
-                'status' => 400,
-            ], 400);
+                'status' => 400
+            ];
+            return response()->json($data, 400);
         }
 
-        $property = Property::create(['name' => $request->name]);
+        $property = Property::create([
+            'name' => $request->name,
+        ]);
 
         if (!$property) {
-            return response()->json(['message' => 'Propiedad no creada', 'status' => 500], 500);
+            $data = [
+                'message' => 'Propiedad no creada',
+                'status' => 500
+            ];
+            return response()->json($data, 500);
         }
 
-        return response()->json(['message' => 'Propiedad creada', 'status' => 201], 201);
+        $data = [
+            'message' => 'Propiedad creada',
+            'status' => 201
+        ];
+
+        return response()->json($data, 201);
     }
 
     public function update(Request $request, $id)
@@ -53,11 +72,12 @@ class PropertyController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validación fallida',
+            $data = [
+                'message' => 'Validacion fallida',
                 'errors' => $validator->errors(),
-                'status' => 400,
-            ], 400);
+                'status' => 400
+            ];
+            return response()->json($data, 400);
         }
 
         $property->update($request->all());
@@ -65,16 +85,36 @@ class PropertyController extends Controller
         return response()->json(['message' => 'Propiedad actualizada'], 200);
     }
 
-    public function show($id)
-    {
-        return Property::with('booking')->findOrFail($id);
+    public function show($id){
+        return Property::findOrFail($id);
     }
+
+    public function getBookings($id)
+{
+    $property = Property::with('booking')->find($id);
+
+    if (!$property) {
+        return response()->json(['message' => 'Propiedad no encontrada'], 404);
+    }
+
+    $bookings = $property->booking->map(function ($booking) {
+        return [
+            'id' => $booking->id,
+            'name_client' => $booking->name_client,
+            'date_start' => $booking->date_start,
+            'date_end' => $booking->date_end,
+        ];
+    });
+
+    return response()->json(['bookings' => $bookings], 200);
+}
 
     public function destroy($id)
     {
         $property = Property::findOrFail($id);
         $property->delete();
-
         return response()->json(['message' => 'Propiedad eliminada'], 200);
     }
+
+
 }
